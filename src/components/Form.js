@@ -12,13 +12,11 @@ class Form extends React.Component {
             user_id: 1
         }
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleChange = this.handleChange.bind(this)
+        // this.handleChange = this.handleChange.bind(this)
         // this.cleanArray = this.cleanArray.bind(this)
     }
 
-    handleChange (event) {
-        this.setState({[event.target.id] : event.target.value})
-      }
+    
 
       handleSubmit (event){
           
@@ -37,24 +35,24 @@ class Form extends React.Component {
           event,
           {
               
-              comments: this.state.comments,
-              food_name: this.state.food_name,
-              title: this.state.title,
-              sick: this.state.sick,
-              sick_type: this.state.sick_type,
-              user_id: this.state.user_id,
+              comments: this.props.comments,
+              food_name: this.props.food_name,
+              title: this.props.title,
+              sick: this.props.sick,
+              sick_type: this.props.sick_type,
+              user_id: this.props.user_id,
             //   PROBABLY WILL MAKE USER ID COME DOWN FROM APP
               
           }
         )
-        this.setState({
-          comments:'',
-          food_name:'',
-          title:'',
-          sick: 0,
-          sick_type: false,
-          
-        })
+        // this.setState({
+        //   comments:'',
+        //   food_name:'',
+        //   title:'',
+        //   sick: 0,
+        //   sick_type: false,
+        // //   probably shoudl move this to the handleAdd form??
+        // })
       //   if(this.props.notice) {
       //     this.props.toggleForm()
       //   }
@@ -65,43 +63,43 @@ class Form extends React.Component {
         return(
             <form onSubmit={this.handleSubmit}>
                 <Input
-                    handleChange={this.handleChange}
+                    handleChange={this.props.handleChange}
                     name={'title'}
                     placeholder={'title'}
                     type={'text'}
-                    value={this.state.title}
+                    value={this.props.title}
                     id={'title'}
                 />  
                 <Input
-                    handleChange={this.handleChange}
+                    handleChange={this.props.handleChange}
                     name={'comments'}
                     placeholder={'comments'}
                     type={'textarea'}
-                    value={this.state.comments}
+                    value={this.props.comments}
                     id={'comments'}
                 />  
                 <Input
-                    handleChange={this.handleChange}
+                    handleChange={this.props.handleChange}
                     name={'sick'}
                     placeholder={'sick'}
                     type={'text'}
-                    value={this.state.sick}
+                    value={this.props.sick}
                     id={'sick'}
                 />  
                 <Input
-                    handleChange={this.handleChange}
+                    handleChange={this.props.handleChange}
                     name={'sick_type'}
                     placeholder={'sick_type'}
                     type={'text'}
-                    value={this.state.sick_type}
+                    value={this.props.sick_type}
                     id={'sick_type'}
                 />  
                  <Input
-                    handleChange={this.handleChange}
+                    handleChange={this.props.handleChange}
                     name={'food_name'}
                     placeholder={'food_name'}
                     type={'text'}
-                    value={this.state.food_name}
+                    value={this.props.food_name}
                     id={'food_name'}
                 /> 
 

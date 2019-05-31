@@ -1,4 +1,5 @@
 import React from 'react'
+import Form from './Form'
 let baseURL = ''
 
 if (process.env.NODE_ENV === 'development') {
@@ -34,6 +35,7 @@ class Meal extends React.Component {
                   <button>Toggle Sick</button>
                   <button>Edit Button</button>
                   <button onClick={() => this.props.handleDelete(this.props.meal)}>Delete</button>
+                  <Form />
                 </div>
 
 
