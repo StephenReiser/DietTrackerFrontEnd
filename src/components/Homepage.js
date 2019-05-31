@@ -24,7 +24,7 @@ class Homepage extends React.Component {
       }
     getMeals (){
         
-        fetch(baseURL + 'users/1/meals')
+        fetch(baseURL + '/users/1/meals')
         .then(response => response.json()).then((json) => {
             return this.setState({
             userMeals:json
