@@ -14,7 +14,7 @@ class Meals extends React.Component {
                 const day = date.getUTCDate()
                 const fullDate = month + "/" + day + "/" + year
                 return (
-                      <Meal fullDate = {fullDate} meal = {meal}/>
+                      <Meal fullDate = {fullDate} meal = {meal} key={meal + meal.id} handleDelete = {this.props.handleDelete}/>
                 
                 )
               })}
