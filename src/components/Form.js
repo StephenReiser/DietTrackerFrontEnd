@@ -9,14 +9,32 @@ class Form extends React.Component {
             title: '',
             sick: false,
             sick_type: '',
-            user_id: 1
+            user_id: 1,
+            mealId: 0
         }
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleChange = this.handleChange.bind(this)
         // this.handleChange = this.handleChange.bind(this)
         // this.cleanArray = this.cleanArray.bind(this)
     }
-
+    componentWillMount() {
+        if(this.props.meal) {
+          this.setState({
+            title: this.props.meal.title || '',
+            food_name: this.props.meal.food_name || '',
+            sick: this.props.meal.sick || false,
+            sick_type: this.props.meal.sick_type || '',
+            comments: this.props.meal.comments || false,
+           
+            mealId: this.props.meal.id || '',
+           
+          })
+        }
+      }
     
+    handleChange (event) {
+        this.setState({[event.target.id] : event.target.value})
+      } 
 
       handleSubmit (event){
           
@@ -35,12 +53,13 @@ class Form extends React.Component {
           event,
           {
               
-              comments: this.props.comments,
-              food_name: this.props.food_name,
-              title: this.props.title,
-              sick: this.props.sick,
-              sick_type: this.props.sick_type,
-              user_id: this.props.user_id,
+              comments: this.state.comments,
+              food_name: this.state.food_name,
+              title: this.state.title,
+              sick: this.state.sick,
+              sick_type: this.state.sick_type,
+              user_id: this.state.user_id,
+              mealId: this.state.mealId
             //   PROBABLY WILL MAKE USER ID COME DOWN FROM APP
               
           }
@@ -63,43 +82,43 @@ class Form extends React.Component {
         return(
             <form onSubmit={this.handleSubmit}>
                 <Input
-                    handleChange={this.props.handleChange}
+                    handleChange={this.handleChange}
                     name={'title'}
                     placeholder={'title'}
                     type={'text'}
-                    value={this.props.title}
+                    value={this.state.title}
                     id={'title'}
                 />  
                 <Input
-                    handleChange={this.props.handleChange}
+                    handleChange={this.handleChange}
                     name={'comments'}
                     placeholder={'comments'}
                     type={'textarea'}
-                    value={this.props.comments}
+                    value={this.state.comments}
                     id={'comments'}
                 />  
                 <Input
-                    handleChange={this.props.handleChange}
+                    handleChange={this.handleChange}
                     name={'sick'}
                     placeholder={'sick'}
                     type={'text'}
-                    value={this.props.sick}
+                    value={this.state.sick}
                     id={'sick'}
                 />  
                 <Input
-                    handleChange={this.props.handleChange}
+                    handleChange={this.handleChange}
                     name={'sick_type'}
                     placeholder={'sick_type'}
                     type={'text'}
-                    value={this.props.sick_type}
+                    value={this.state.sick_type}
                     id={'sick_type'}
                 />  
                  <Input
-                    handleChange={this.props.handleChange}
+                    handleChange={this.handleChange}
                     name={'food_name'}
                     placeholder={'food_name'}
                     type={'text'}
-                    value={this.props.food_name}
+                    value={this.state.food_name}
                     id={'food_name'}
                 /> 
 
