@@ -27,8 +27,13 @@ class Meals extends React.Component {
         this.getMeals()
       }
     getMeals (){
-        
-        fetch(baseURL + '/users/1/meals')
+        let token = "Bearer " + localStorage.getItem("jwt")
+        fetch(baseURL + '/users/1/meals', {
+          method: "GET",
+          headers: {
+        "Authorization": token
+      }
+        })
         .then(response => response.json()).then((json) => {
             return this.setState({
             userMeals:json
@@ -39,13 +44,15 @@ class Meals extends React.Component {
 
     handleAdd(event, formInputs) {
         event.preventDefault()
+        let token = "Bearer " + localStorage.getItem("jwt")
         console.log(formInputs)
         fetch(baseURL + '/users/1/meals', {
           body: JSON.stringify(formInputs),
           method: 'POST',
           headers: {
             'Accept': 'applciation/json, text/plain, */*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "Authorization": token
           }
         })
         .then (createdMeal => {
@@ -54,18 +61,21 @@ class Meals extends React.Component {
         .then (jsonMeal => {
           return this.setState({
             userMeals: [jsonMeal, ...this.state.userMeals]
-            // currently houses isn't getting read
+            //  Add is working - probably should be resetting input form
           })
         })
         .catch(error => console.log(error))
       }
 
       handleDelete (deletedMeal) {
+        // event.preventDefault()
+        let token = "Bearer " + localStorage.getItem("jwt")
         fetch(baseURL + `/users/1/meals/${deletedMeal.id}`, {
           method: 'DELETE',
           headers: {
             'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "Authorization": token
           }}).then(json => {
               this.setState(state => {
                   const userMeals = state.userMeals.filter(meal => meal.id !== deletedMeal.id)
@@ -81,12 +91,14 @@ class Meals extends React.Component {
         handleUpdate (event, formInputs) {
           event.preventDefault()
           console.log(formInputs)
+          let token = "Bearer " + localStorage.getItem("jwt")
           fetch(baseURL + `/users/${formInputs.user_id}/meals/${formInputs.mealId}`, {
             body: JSON.stringify(formInputs),
             method: 'PUT',
          headers: {
            'Accept': 'application/json, text/plain, */*',
-           'Content-Type': 'application/json'
+           'Content-Type': 'application/json',
+           "Authorization": token
          }
         })
          .then(updatedHouse => {
