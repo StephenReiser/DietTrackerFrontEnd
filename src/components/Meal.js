@@ -32,7 +32,8 @@ class Meal extends React.Component {
                     })}
                     
                   </ul> */}
-                  <p>Your Comments: {this.props.meal.comments}</p>
+                  <p>Your Comments: {this.props.meal.comments}
+                  User: ID: {this.props.meal.user_id}</p>
                   <button>Toggle Sick</button>
                   <button>Edit Button</button>
                   <button onClick={() => this.props.handleDelete(this.props.meal)}>Delete</button>

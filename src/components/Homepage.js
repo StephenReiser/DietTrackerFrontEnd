@@ -42,7 +42,7 @@ class Homepage extends React.Component {
                 </div>
                 {/* <div className = 'row'> */}
                 <div className = 'col m12'>
-                    <Meals user_id = {this.state.user_id}/>
+                    <Meals user_id = {this.state.user_id} currentUser = {this.props.currentUser} currentId = {this.props.currentId}/>
                 </div>
                 {/* </div> */}
             </div>

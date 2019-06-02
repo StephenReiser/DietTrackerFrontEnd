@@ -23,12 +23,13 @@ class Meals extends React.Component {
         this.handleDelete = this.handleDelete.bind(this)
         this.handleUpdate = this.handleUpdate.bind(this)
     }
-    componentDidMount() {
+    componentWillMount() {
         this.getMeals()
       }
     getMeals (){
+        console.log(baseURL + `/users/${this.props.currentId}/meals`)
         let token = "Bearer " + localStorage.getItem("jwt")
-        fetch(baseURL + '/users/1/meals', {
+        fetch(baseURL + `/users/${this.props.currentId}/meals`, {
           method: "GET",
           headers: {
         "Authorization": token
@@ -46,7 +47,8 @@ class Meals extends React.Component {
         event.preventDefault()
         let token = "Bearer " + localStorage.getItem("jwt")
         console.log(formInputs)
-        fetch(baseURL + '/users/1/meals', {
+        console.log(baseURL + `/users/${this.props.currentId}/meals`)
+        fetch(baseURL + `/users/${this.props.currentId}/meals`, {
           body: JSON.stringify(formInputs),
           method: 'POST',
           headers: {
@@ -70,7 +72,7 @@ class Meals extends React.Component {
       handleDelete (deletedMeal) {
         // event.preventDefault()
         let token = "Bearer " + localStorage.getItem("jwt")
-        fetch(baseURL + `/users/1/meals/${deletedMeal.id}`, {
+        fetch(baseURL + `/users/${this.props.currentId}/meals/${deletedMeal.id}`, {
           method: 'DELETE',
           headers: {
             'Accept': 'application/json, text/plain, */*',
@@ -101,7 +103,7 @@ class Meals extends React.Component {
            "Authorization": token
          }
         })
-         .then(updatedHouse => {
+         .then(updatedMeal => {
           //  this is making the whole thing rerender - need to splice it
           // const editHouses = houses.filter()
            this.getMeals()
@@ -111,7 +113,7 @@ class Meals extends React.Component {
     render() {
         return(
             <>
-            <Form handleSubmit = {this.handleAdd}/>
+            <Form handleSubmit = {this.handleAdd} user_id = {this.props.currentId}/>
             {this.state.userMeals.map(meal => {
                 const date = new Date(meal.created_at)
                 const year = date.getUTCFullYear()

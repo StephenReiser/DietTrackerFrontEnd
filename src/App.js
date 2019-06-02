@@ -26,7 +26,8 @@ class App extends React.Component {
       password_confirmation: '',
       loginEmail: '',
       loginPassword: '',
-      currentUser: ''
+      currentUser: '',
+      currentUserId: ''
     }
     this.login = this.login.bind(this)
     this.logOut = this.logOut.bind(this)
@@ -131,7 +132,9 @@ class App extends React.Component {
           const user = json.filter(user => {
            return  user.email === email
           })
-          return console.log(user[0].id)
+          return this.setState({
+            currentUserId: user[0].id
+          })
         })
       .catch(error => console.error(error))
       
@@ -141,7 +144,8 @@ class App extends React.Component {
     event.preventDefault()
     localStorage.clear()
     this.setState({
-      currentUser: ''
+      currentUser: '',
+      currentUserId: ''
     })
     // I think it makes sense to alter state when logged in and logged out
   }
@@ -158,10 +162,12 @@ class App extends React.Component {
           <Route path ='/signup' render = {() => <NewUser handleAdd = {this.handleAdd} handleChange = {this.handleChange} email = {this.state.email} password = {this.state.password} password_confirmation = {this.state.password_confirmation}/> } />
 
           <button onClick = {this.logOut}>Log Out</button>
-          <h1>Some User Name Food Tracker</h1>
 
           {/* this way - when logged in state, can render just home page or just sign up page */}
-          <Homepage />
+          {this.state.currentUser ? <Route path= '/' exact render = {()=> <Homepage currentUser = {this.state.currentUser} currentId = {this.state.currentUserId}/>} /> : null }
+          
+          {/* <h1>Some User Name Food Tracker</h1> */}
+          
           
         
         

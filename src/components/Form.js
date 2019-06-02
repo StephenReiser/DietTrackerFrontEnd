@@ -25,6 +25,7 @@ class Form extends React.Component {
             sick: this.props.meal.sick || false,
             sick_type: this.props.meal.sick_type || '',
             comments: this.props.meal.comments || false,
+            user_id: this.props.currentId,
            
             mealId: this.props.meal.id || '',
            
@@ -58,7 +59,7 @@ class Form extends React.Component {
               title: this.state.title,
               sick: this.state.sick,
               sick_type: this.state.sick_type,
-              user_id: this.state.user_id,
+              user_id: this.props.user_id,
               mealId: this.state.mealId
             //   PROBABLY WILL MAKE USER ID COME DOWN FROM APP
               
