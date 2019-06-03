@@ -66,7 +66,7 @@ class Meal extends React.Component {
                   <button onClick = {this.showEdit}>Edit Button</button>
                   <button onClick={() => this.props.handleDelete(this.props.meal)}>Delete</button>
 
-                  {this.state.editAvailable ? <Form meal = {this.props.meal} handleSubmit = {this.props.handleEdit} comments = {this.props.meal.comments} food_name={this.props.meal.food_name} sick = {this.props.meal.sick} sick_type = {this.props.meal.sick_type} title = {this.props.meal.title} user_id = {this.props.user_id} editAvailable = {this.state.editAvailable} showEdit = {this.showEdit}/> : null }
+                  {this.state.editAvailable ? <Form meal = {this.props.meal} handleSubmit = {this.props.handleEdit} comments = {this.props.meal.comments} food_name={this.props.meal.food_name} sick = {this.props.meal.sick} sick_type = {this.props.meal.sick_type} title = {this.props.meal.title} user_id = {user.currentUserId} editAvailable = {this.state.editAvailable} showEdit = {this.showEdit}/> : null }
                   
                 </div>
 

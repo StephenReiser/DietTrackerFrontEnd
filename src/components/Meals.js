@@ -124,6 +124,7 @@ class Meals extends React.Component {
           //  this is making the whole thing rerender - need to splice it
           // const editHouses = houses.filter()
           //  this.getMeals()
+          console.log(updatedMeal)
            const copyMeals = [...this.state.userMeals]
            const findIndex = this.state.userMeals.findIndex(meal => meal.id === formInputs.mealId)
            copyMeals[findIndex] = updatedMeal.meal
@@ -176,6 +177,7 @@ class Meals extends React.Component {
          }
         }).then(response => response.json())
         .then(updatedMeal => {
+          console.log(updatedMeal)
          //  this is making the whole thing rerender - need to splice it
          // const editHouses = houses.filter()
          //  this.getMeals()
