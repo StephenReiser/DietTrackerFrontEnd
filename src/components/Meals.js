@@ -77,9 +77,10 @@ class Meals extends React.Component {
           return createdMeal.json()
         })
         .then (jsonMeal => {
+          console.log(jsonMeal)
           return this.setState({
-            userMeals: [jsonMeal, ...this.state.userMeals]
-            //  Add is working - probably should be resetting input form
+            userMeals: [jsonMeal.meal, ...this.state.userMeals]
+            //  Probably shoudl set state here with the new sickString
           })
         })
         .catch(error => console.log(error))
@@ -125,7 +126,7 @@ class Meals extends React.Component {
           //  this.getMeals()
            const copyMeals = [...this.state.userMeals]
            const findIndex = this.state.userMeals.findIndex(meal => meal.id === formInputs.mealId)
-           copyMeals[findIndex] = updatedMeal
+           copyMeals[findIndex] = updatedMeal.meal
            this.setState({
              userMeals: copyMeals,
             // foodArr: copyMeals.food_name.split(' ')

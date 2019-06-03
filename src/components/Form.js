@@ -26,7 +26,7 @@ class Form extends React.Component {
             sick: this.props.meal.sick || false,
             sick_type: this.props.meal.sick_type || '',
             comments: this.props.meal.comments || false,
-            user_id: this.props.currentId,
+            user_id: this.props.meal.user_id,
            
             mealId: this.props.meal.id || '',
            
