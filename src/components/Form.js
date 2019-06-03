@@ -14,6 +14,7 @@ class Form extends React.Component {
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.handleCheck = this.handleCheck.bind(this)
         // this.handleChange = this.handleChange.bind(this)
         // this.cleanArray = this.cleanArray.bind(this)
     }
@@ -79,6 +80,13 @@ class Form extends React.Component {
         // this.props.toggleForm()
         }
 
+        handleCheck () {
+          // should be if checked = set state to true, else set state to false
+          this.setState({
+            sick: !this.state.sick
+          })
+        }
+
     render() {
         return(
             <form onSubmit={this.handleSubmit}>
@@ -98,14 +106,27 @@ class Form extends React.Component {
                     value={this.state.comments}
                     id={'comments'}
                 />  
-                <Input
+                {/* <Input
                     handleChange={this.handleChange}
                     name={'sick'}
                     placeholder={'sick'}
                     type={'text'}
                     value={this.state.sick}
                     id={'sick'}
-                />  
+                />   */}
+                
+
+                {/* this below beasically is forcing user to use toggle sick button on edit but there is a check box on add new */}
+                  {this.props.editAvailable ? null : <label>
+                    <input type="checkbox" id = 'sick' onChange={this.handleCheck}/>
+                    <span>Did this Make you sick?</span>
+                  </label>}
+
+                 {/* <label>
+                    <input type="checkbox" id = 'sick' onChange={this.handleCheck}/>
+                    <span>Did this Make you sick?</span>
+                </label> */}
+               
                 <Input
                     handleChange={this.handleChange}
                     name={'sick_type'}
