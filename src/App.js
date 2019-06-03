@@ -1,9 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
+
 import Homepage from './components/Homepage';
 import Login from './components/Login'
 import NewUser from './components/NewUser'
 import Navbar from './components/Navbar'
+import UserContext from './components/UserContext'
 
 
 let baseURL = ''
@@ -27,7 +29,9 @@ class App extends React.Component {
       loginEmail: '',
       loginPassword: '',
       currentUser: '',
-      currentUserId: ''
+      currentUserId: '',
+      loggedIn: false,
+      tempID: ''
     }
     this.login = this.login.bind(this)
     this.logOut = this.logOut.bind(this)
@@ -93,13 +97,16 @@ class App extends React.Component {
       
     }).then(result => this.getUser(result))
     
-    .then(() => {
-      return this.setState({
-        currentUser: email,
-        loginEmail: '',
-        loginPassword: ''
-      })
-    }).catch(error => console.log(error))
+    // .then(() => {
+    //   return this.setState({
+    //     currentUser: email,
+    //     loginEmail: '',
+    //     loginPassword: '',
+    //     loggedIn: true,
+    //     currentUserId: this.state.tempID
+    //   })
+    // })
+    .catch(error => console.log(error))
   // realistically should set state here to be like incorrect credentials, and then render a new view
   
   
@@ -107,12 +114,10 @@ class App extends React.Component {
 
 
 
-
-
   // Need a function to hit user index route
 
   getUser (jwtToken) {
-      let token = "Bearer " + jwtToken
+    let token = "Bearer " + localStorage.getItem("jwt")
       console.log(token)
       const email = this.state.loginEmail
       fetch(baseURL + '/users', {
@@ -133,7 +138,9 @@ class App extends React.Component {
            return  user.email === email
           })
           return this.setState({
-            currentUserId: user[0].id
+            currentUserId: user[0].id,
+            loggedIn: true,
+            currentUser: this.state.loginEmail
           })
         })
       .catch(error => console.error(error))
@@ -152,19 +159,28 @@ class App extends React.Component {
   
 
   render () {
+    const { user } = {
+      user: this.state
+    }
+
     return(
+      <UserContext.Provider value={user}>
       <Router>
         <Navbar />
       
         <div className = 'container'>
-          <Route path = '/login' render = {() => <Login login = {this.login} handleChange = {this.handleChange} loginEmail = {this.state.loginEmail} loginPassword = {this.state.loginPassword}/>} />
+          <Route path = '/login' render = {() => <Login login = {this.login} handleChange = {this.handleChange} loginEmail = {this.state.loginEmail} loginPassword = {this.state.loginPassword} 
+          loggedIn = {this.state.loggedIn}
+          currentUser = {this.state.currentUser} currentId = {this.state.currentUserId}/>} />
+
+          
 
           <Route path ='/signup' render = {() => <NewUser handleAdd = {this.handleAdd} handleChange = {this.handleChange} email = {this.state.email} password = {this.state.password} password_confirmation = {this.state.password_confirmation}/> } />
 
           <button onClick = {this.logOut}>Log Out</button>
 
           {/* this way - when logged in state, can render just home page or just sign up page */}
-          {this.state.currentUser ? <Route path= '/' exact render = {()=> <Homepage currentUser = {this.state.currentUser} currentId = {this.state.currentUserId}/>} /> : null }
+          {this.state.currentUser ? <Route path= '/' exact render = {()=> <Homepage currentUser = {this.state.currentUser} currentId = {this.state.currentUserId} props = {this.state}/>} /> : null }
           
           {/* <h1>Some User Name Food Tracker</h1> */}
           
@@ -174,6 +190,7 @@ class App extends React.Component {
 
       </div>
       </Router>
+      </UserContext.Provider>
     ) 
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import Meals from './Meals'
 import Form from './Form'
+import UserContext from './UserContext'
 
 // url to front end: https://protected-thicket-74691.herokuapp.com/
 
@@ -31,6 +32,8 @@ class Homepage extends React.Component {
           
     render () {
           return(
+            // <UserContext.Consumer>
+            //   {user => (
               <div className = 'row'>
                 <div className = 'col m3'>
                 {/* <Form handleSubmit = {this.handleAdd} user_id = {this.state.user_id}/> */}
@@ -42,10 +45,13 @@ class Homepage extends React.Component {
                 </div>
                 {/* <div className = 'row'> */}
                 <div className = 'col m12'>
-                    <Meals user_id = {this.state.user_id} currentUser = {this.props.currentUser} currentId = {this.props.currentId}/>
+                    <Meals currentUser = {this.props.currentUser} currentId = {this.props.currentId}
+                    IDTEST = {this.props.currentId} props = {this.props}/>
                 </div>
                 {/* </div> */}
             </div>
+            // )}
+            // </UserContext.Consumer>
           )
       }
 }

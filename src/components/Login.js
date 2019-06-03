@@ -1,4 +1,6 @@
 import React from 'react'
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
+import Homepage from './Homepage'
 
 class Login extends React.Component {
 
@@ -33,6 +35,7 @@ class Login extends React.Component {
           >
               Login
           </button>
+          {this.props.loggedIn ? <Redirect to ='/' /> : null}
           </>
         )
     }

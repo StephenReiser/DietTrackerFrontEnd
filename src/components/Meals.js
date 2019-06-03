@@ -1,6 +1,7 @@
 import React from 'react'
 import Meal from './Meal'
 import Form from './Form'
+import UserContext from './UserContext'
 
 let baseURL = ''
 
@@ -24,10 +25,18 @@ class Meals extends React.Component {
         this.handleUpdate = this.handleUpdate.bind(this)
     }
     componentWillMount() {
+      
         this.getMeals()
       }
+
+
+      // For some reason currentId isn't getting passed down
     getMeals (){
         console.log(baseURL + `/users/${this.props.currentId}/meals`)
+        console.log(this.props)
+        // console.log(this.context.user)
+        
+        
         let token = "Bearer " + localStorage.getItem("jwt")
         fetch(baseURL + `/users/${this.props.currentId}/meals`, {
           method: "GET",
@@ -112,7 +121,11 @@ class Meals extends React.Component {
         }
     render() {
         return(
-            <>
+            <UserContext.Consumer>
+              {user => (
+                <>
+                {/* <h1>{user.currentUserId}</h1>
+                <h1>{this.props.currentId}</h1> */}
             <Form handleSubmit = {this.handleAdd} user_id = {this.props.currentId}/>
             {this.state.userMeals.map(meal => {
                 const date = new Date(meal.created_at)
@@ -127,6 +140,8 @@ class Meals extends React.Component {
                 )
               })}
               </>
+              )}
+              </UserContext.Consumer>
             
         )
     }
