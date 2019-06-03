@@ -85,6 +85,7 @@ class Form extends React.Component {
               sick: false,
               sick_type: '',
           })
+          document.getElementById('sick').checked = false
         }
         // this.props.toggleForm()
         }

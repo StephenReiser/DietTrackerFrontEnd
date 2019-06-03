@@ -19,9 +19,13 @@ class Meal extends React.Component {
     }
     // this.deleteMeal = this.deleteMeal.bind(this)
     this.showEdit = this.showEdit.bind(this)
+    // this.splitFood = this.splitFood.bind(this)
 
   }
-  
+  // componentWillMount () {
+  //   // this.splitFood() 
+  //   // this works but isn't running on edit
+  // }
   showEdit (event) {
     // event.preventDefault()
     this.setState({
@@ -29,21 +33,31 @@ class Meal extends React.Component {
     })
   }
 
+  // splitFood () {
+  //   this.setState({
+  //     foodArr: this.props.meal.food_name.split(' ')
+  //   })
+  // }
+
 
     render() {
+      // const foodArr = this.props.meal.food_name.split(' ')
         return(
           <UserContext.Consumer>
               {user => (
                 <div key={this.props.meal.id}>
                   <h4>{this.props.fullDate}  {this.props.meal.title}</h4>
                   <p>{this.props.meal.sick ? `This made your ${this.props.meal.sick_type} sick` : 'Not Sick'}</p>
-                  <h5>{this.props.meal.food_name}</h5>
+                  {/* <h5>{this.props.meal.food_name}</h5> */}
                   {/* <ul>
-                    {this.props.meal.food_name.map(food => {
+                    {this.props.foodArr.map(item => <li key = {item + this.props.meal.id}>{item}</li>)}
+                  </ul> */}
+                  <ul>
+                    {this.props.meal.food_name.split(' ').map(food => {
                       return (<li key={food}>{food}</li>)
                     })}
                     
-                  </ul> */}
+                  </ul>
                   <p>Your Comments: {this.props.meal.comments}
                   User: ID: {this.props.meal.user_id}</p>
                   <button onClick = {() => this.props.toggleSick(this.props.meal, user.currentUserId)}>Toggle Sick</button>

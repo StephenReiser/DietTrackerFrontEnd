@@ -55,14 +55,17 @@ class Meals extends React.Component {
 
     handleAdd(event, formInputs) {
         event.preventDefault()
-        let token = "Bearer " + localStorage.getItem("jwt")
+        // const foodArr = formInputs.food_meal.split(' ')
+        // console.log(foodArr)
+        // formInputs.food_meal = foodArr
+        const token = "Bearer " + localStorage.getItem("jwt")
         console.log(formInputs)
         console.log(baseURL + `/users/${this.props.currentId}/meals`)
         fetch(baseURL + `/users/${this.props.currentId}/meals`, {
           body: JSON.stringify(formInputs),
           method: 'POST',
           headers: {
-            'Accept': 'applciation/json, text/plain, */*',
+            'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json',
             "Authorization": token
           }
@@ -120,7 +123,10 @@ class Meals extends React.Component {
            const copyMeals = [...this.state.userMeals]
            const findIndex = this.state.userMeals.findIndex(meal => meal.id === formInputs.mealId)
            copyMeals[findIndex] = updatedMeal
-           this.setState({userMeals: copyMeals})
+           this.setState({
+             userMeals: copyMeals,
+            // foodArr: copyMeals.food_name.split(' ')
+          })
          })
          .catch(error => console.log(error))
         }
@@ -193,9 +199,12 @@ class Meals extends React.Component {
                 const month = date.getUTCMonth() + 1
                 const day = date.getUTCDate()
                 const fullDate = month + "/" + day + "/" + year
+                // let foodArr = ''
+                // {this.state.foodArr ? foodArr = this.state.foodArr : foodArr = meal.food_name.split(' ')}
+                // const foodArr = meal.food_name.split(' ')
                 return (
                       <Meal fullDate = {fullDate} meal = {meal} key={meal + meal.id} handleDelete = {this.handleDelete} user_id = {this.props.user_id}
-                      
+                      // foodArr = {foodArr}
                       handleEdit = {this.handleUpdate} toggleSick = {this.toggleSick}/>
                 
                 )
