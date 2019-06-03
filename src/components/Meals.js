@@ -112,11 +112,15 @@ class Meals extends React.Component {
            'Content-Type': 'application/json',
            "Authorization": token
          }
-        })
+        }).then(response => response.json())
          .then(updatedMeal => {
           //  this is making the whole thing rerender - need to splice it
           // const editHouses = houses.filter()
-           this.getMeals()
+          //  this.getMeals()
+           const copyMeals = [...this.state.userMeals]
+           const findIndex = this.state.userMeals.findIndex(meal => meal.id === formInputs.mealId)
+           copyMeals[findIndex] = updatedMeal
+           this.setState({userMeals: copyMeals})
          })
          .catch(error => console.log(error))
         }
@@ -160,12 +164,16 @@ class Meals extends React.Component {
            'Content-Type': 'application/json',
            "Authorization": token
          }
+        }).then(response => response.json())
+        .then(updatedMeal => {
+         //  this is making the whole thing rerender - need to splice it
+         // const editHouses = houses.filter()
+         //  this.getMeals()
+          const copyMeals = [...this.state.userMeals]
+          const findIndex = this.state.userMeals.findIndex(meal => meal.id === formInputs.mealId)
+          copyMeals[findIndex] = updatedMeal
+          this.setState({userMeals: copyMeals})
         })
-         .then(updatedMeal => {
-          //  this is making the whole thing rerender - need to splice it
-          // const editHouses = houses.filter()
-           this.getMeals()
-         })
          .catch(error => console.log(error))
         }
 
