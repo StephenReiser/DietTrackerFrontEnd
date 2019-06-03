@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
 
 class NewUser extends React.Component {
     render () {
@@ -40,6 +40,7 @@ class NewUser extends React.Component {
         
           
         </form>
+        {this.props.loggedIn ? <Redirect to ='/' /> : null}
             </>
         )
     }

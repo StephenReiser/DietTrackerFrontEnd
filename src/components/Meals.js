@@ -23,6 +23,7 @@ class Meals extends React.Component {
         this.getMeals = this.getMeals.bind(this)
         this.handleDelete = this.handleDelete.bind(this)
         this.handleUpdate = this.handleUpdate.bind(this)
+        this.toggleSick = this.toggleSick.bind(this)
     }
     componentWillMount() {
       
@@ -119,6 +120,57 @@ class Meals extends React.Component {
          })
          .catch(error => console.log(error))
         }
+
+        // toggleSick (user_id, mealId, sick_status) {
+        //   // event.preventDefault()
+        //   console.log(user_id, mealId)
+        //   let token = "Bearer " + localStorage.getItem("jwt")
+        //   let sickUpdate = !sick_status
+        //   console.log(JSON.stringify(`meal[sick]=${sickUpdate}`))
+        
+
+        //   fetch(baseURL + `/users/${user_id}/meals/${mealId}`, {
+        //     body: `meal[sick]=${sickUpdate}`,
+        //     method: 'PATCH',
+        //  headers: {
+        //    'Accept': 'application/json, text/plain, */*',
+        //    'Content-Type': 'application/json',
+        //    "Authorization": token
+        //  }
+        // })
+        //  .then(updatedMeal => {
+        //   //  this is making the whole thing rerender - need to splice it
+        //   // const editHouses = houses.filter()
+        //    this.getMeals()
+        //  })
+        //  .catch(error => console.log(error))
+        // }
+
+        toggleSick (formInputs, user_id) {
+          // event.preventDefault()
+          console.log(formInputs)
+          formInputs.sick = !formInputs.sick
+          console.log(formInputs)
+          let token = "Bearer " + localStorage.getItem("jwt")
+          fetch(baseURL + `/users/${user_id}/meals/${formInputs.id}`, {
+            body: JSON.stringify(formInputs),
+            method: 'PUT',
+         headers: {
+           'Accept': 'application/json, text/plain, */*',
+           'Content-Type': 'application/json',
+           "Authorization": token
+         }
+        })
+         .then(updatedMeal => {
+          //  this is making the whole thing rerender - need to splice it
+          // const editHouses = houses.filter()
+           this.getMeals()
+         })
+         .catch(error => console.log(error))
+        }
+
+
+
     render() {
         return(
             <UserContext.Consumer>
@@ -135,7 +187,8 @@ class Meals extends React.Component {
                 const fullDate = month + "/" + day + "/" + year
                 return (
                       <Meal fullDate = {fullDate} meal = {meal} key={meal + meal.id} handleDelete = {this.handleDelete} user_id = {this.props.user_id}
-                      handleEdit = {this.handleUpdate}/>
+                      
+                      handleEdit = {this.handleUpdate} toggleSick = {this.toggleSick}/>
                 
                 )
               })}

@@ -46,7 +46,7 @@ class Homepage extends React.Component {
                 {/* <div className = 'row'> */}
                 <div className = 'col m12'>
                     <Meals currentUser = {this.props.currentUser} currentId = {this.props.currentId}
-                    IDTEST = {this.props.currentId} props = {this.props}/>
+                    />
                 </div>
                 {/* </div> */}
             </div>

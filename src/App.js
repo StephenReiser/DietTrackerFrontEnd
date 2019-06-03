@@ -38,6 +38,7 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleAdd = this.handleAdd.bind(this)
     this.getUser = this.getUser.bind(this)
+    this.getNewUser = this.getNewUser.bind(this)
     
   }
   handleChange (event) {
@@ -62,7 +63,46 @@ class App extends React.Component {
       }
     })
     .then (createdUser => {
-      return console.log(createdUser.json())
+      const email = this.state.email
+    const password = this.state.password
+    const request = {"auth": {"email": email, "password": password}}
+    fetch(baseURL + "/user_token", {
+      body: JSON.stringify(request),
+      method: "POST",
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'}
+    })
+    .then(response => response.json())
+    .then(function(result) {
+      console.dir(result)
+      // don't need to see the result
+      localStorage.setItem("jwt", result.jwt)
+      return result.jwt
+      
+      // const jwtToken = result.jwt
+      // this.getUser(jwtToken)
+      
+      
+    }).then(result => this.getNewUser(result))
+    
+    // .then(() => {
+    //   return this.setState({
+    //     currentUser: email,
+    //     loginEmail: '',
+    //     loginPassword: '',
+    //     loggedIn: true,
+    //     currentUserId: this.state.tempID
+    //   })
+    // })
+    .catch(error => console.log(error))
+  // realistically should set state here to be like incorrect credentials, and then render a new view
+  
+  
+  
+
+    }).then(() => {
+      return console.log('test')
     })
     .catch(error => console.log(error))
   }
@@ -114,7 +154,42 @@ class App extends React.Component {
 
 
 
-  // Need a function to hit user index route
+  //This is exactly the same as getUser except changing the constants to loginEmail - should refactor
+  getNewUser (jwtToken) {
+    let token = "Bearer " + localStorage.getItem("jwt")
+      console.log(token)
+      const email = this.state.email
+      fetch(baseURL + '/users', {
+        method: "GET",
+        headers: {
+      "Authorization": token
+    }
+      })
+      .then(response => response.json()).then((json) => {
+          // return this.setState({
+          // userMeals:json
+          // const user = json.filter(user => user.email === this.state.loginEmail)
+          // return console.log(user)
+          // // }
+          // )
+          console.log(this.state.email)
+          const user = json.filter(user => {
+           return  user.email === email
+          })
+          return this.setState({
+            currentUserId: user[0].id,
+            loggedIn: true,
+            currentUser: this.state.email
+          })
+        })
+      .catch(error => console.error(error))
+      
+
+  }
+
+
+
+  // This is exactly the same as getNewUser except this.state.email - shoudl refactor
 
   getUser (jwtToken) {
     let token = "Bearer " + localStorage.getItem("jwt")
@@ -152,7 +227,11 @@ class App extends React.Component {
     localStorage.clear()
     this.setState({
       currentUser: '',
-      currentUserId: ''
+      currentUserId: '',
+      loggedIn: false,
+      password_confirmation: '',
+      loginEmail: '',
+      loginPassword: '',
     })
     // I think it makes sense to alter state when logged in and logged out
   }
@@ -175,7 +254,8 @@ class App extends React.Component {
 
           
 
-          <Route path ='/signup' render = {() => <NewUser handleAdd = {this.handleAdd} handleChange = {this.handleChange} email = {this.state.email} password = {this.state.password} password_confirmation = {this.state.password_confirmation}/> } />
+          <Route path ='/signup' render = {() => <NewUser handleAdd = {this.handleAdd} handleChange = {this.handleChange} email = {this.state.email} password = {this.state.password} password_confirmation = {this.state.password_confirmation} loggedIn = {this.state.loggedIn}
+          currentUser = {this.state.currentUser} currentId = {this.state.currentUserId}/> } />
 
           <button onClick = {this.logOut}>Log Out</button>
 

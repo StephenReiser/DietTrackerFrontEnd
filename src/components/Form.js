@@ -73,9 +73,9 @@ class Form extends React.Component {
         //   sick_type: false,
         // //   probably shoudl move this to the handleAdd form??
         // })
-      //   if(this.props.notice) {
-      //     this.props.toggleForm()
-      //   }
+        if(this.props.editAvailable) {
+          this.props.showEdit()
+        }
         // this.props.toggleForm()
         }
 
@@ -123,7 +123,7 @@ class Form extends React.Component {
                     id={'food_name'}
                 /> 
 
-            <input type='submit' value={this.props.notice ? "update this meal" : "Add a Meal"}/>
+            <input type='submit' value={this.props.editAvailable ? "update this meal" : "Add a Meal"}/>
         </form>
         )
     }
