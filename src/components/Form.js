@@ -77,6 +77,15 @@ class Form extends React.Component {
         if(this.props.editAvailable) {
           this.props.showEdit()
         }
+        if (!this.props.editAvailable) {
+          this.setState({
+              comments:'',
+              food_name:'',
+              title:'',
+              sick: false,
+              sick_type: '',
+          })
+        }
         // this.props.toggleForm()
         }
 
