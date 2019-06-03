@@ -45,9 +45,12 @@ class Meals extends React.Component {
         "Authorization": token
       }
         })
-        .then(response => response.json()).then((json) => {
+        .then(response => response.json()).then((json) =>
+         
+        {
+          console.log(json)
             return this.setState({
-            userMeals:json
+            userMeals:json.meals
             }
             )})
         .catch(error => console.error(error))
@@ -205,7 +208,7 @@ class Meals extends React.Component {
                 return (
                       <Meal fullDate = {fullDate} meal = {meal} key={meal + meal.id} handleDelete = {this.handleDelete} user_id = {this.props.user_id}
                       // foodArr = {foodArr}
-                      handleEdit = {this.handleUpdate} toggleSick = {this.toggleSick}/>
+                      handleEdit = {this.handleUpdate} toggleSick = {this.toggleSick} allMeals = {this.state.userMeals}/>
                 
                 )
               })}

@@ -53,6 +53,8 @@ class Meal extends React.Component {
                     {this.props.foodArr.map(item => <li key = {item + this.props.meal.id}>{item}</li>)}
                   </ul> */}
                   <ul>
+                    {/* to be smarter - should do something like remove , before splitting and 'and' */}
+                    {/* ADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTION */}
                     {this.props.meal.food_name.split(' ').map(food => {
                       return (<li key={food}>{food}</li>)
                     })}
@@ -78,3 +80,7 @@ export default Meal
 
 
 // need to pass to MEAL: handle add handle change and user id
+
+
+
+// If food is part of meals - will need to parse through userMeals and count if meals made someone sick and if ILIKE the word - or can I run this in the meals route?
