@@ -40,11 +40,18 @@ class Meals extends React.Component {
 
       makeChart(sickStringArray) {
         const node = this.node;
+        let smallArray = []
+        if (sickStringArray.length > 10) {
+          smallArray = sickStringArray.slice(sickStringArray.length - 10, sickStringArray.length)
+
+        } else {
+          smallArray = sickStringArray
+        }
         let labelSet = []
         let dataSet = []
-        for (let i = 0; i < sickStringArray.length; i ++) {
-            labelSet.push(sickStringArray[i][0])
-            dataSet.push(sickStringArray[i][1])
+        for (let i = 0; i < smallArray.length; i ++) {
+            labelSet.push(smallArray[i][0])
+            dataSet.push(smallArray[i][1])
         }
         var myChart = new Chart(node, {
           type: "bar",
@@ -61,7 +68,12 @@ class Meals extends React.Component {
                 // ]
               }
             ]
-          }
+          },
+          options: {scales: {
+            yAxes: [{display: true, ticks: {
+              beginAtZero: true
+            }}]
+          }}
         });
       }
     getMeals (){
