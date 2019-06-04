@@ -55,7 +55,8 @@ class Meal extends React.Component {
                   <ul>
                     {/* to be smarter - should do something like remove , before splitting and 'and' */}
                     {/* ADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTION */}
-                    {this.props.meal.food_name.split(' ').map(food => {
+                    {/* used reg expression with replace to replace all commas and then all double spaces */}
+                    {this.props.meal.food_name.replace(/,/g, ' ').replace(/  /g, ' ').split(' ').map(food => {
                       let key = 0
                       for (let i = 0; i < this.props.sickArray.length; i++) {
                         if (this.props.sickArray[i][0] === food.toLowerCase()) {
@@ -64,7 +65,7 @@ class Meal extends React.Component {
                       }
                       return (<li key={food}>{food.toLowerCase()} count: {key}</li>)
                     })}
-                    
+                    {/* maybe add colors based on number of times sick */}
                   </ul>
                   <p>Your Comments: {this.props.meal.comments}
                   User: ID: {this.props.meal.user_id}</p>
