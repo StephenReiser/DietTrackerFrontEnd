@@ -16,7 +16,9 @@ class Meals extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            userMeals: []
+            userMeals: [],
+            test: 0,
+            sickArray: []
 
         }
         this.handleAdd = this.handleAdd.bind(this)
@@ -50,7 +52,8 @@ class Meals extends React.Component {
         {
           console.log(json)
             return this.setState({
-            userMeals:json.meals
+            userMeals:json.meals,
+            sickArray: json.stringResult
             }
             )})
         .catch(error => console.error(error))
@@ -77,9 +80,10 @@ class Meals extends React.Component {
           return createdMeal.json()
         })
         .then (jsonMeal => {
-          console.log(jsonMeal)
+          // console.log(jsonMeal.sickString)
           return this.setState({
-            userMeals: [jsonMeal.meal, ...this.state.userMeals]
+            userMeals: [jsonMeal.meal, ...this.state.userMeals],
+            sickArray: jsonMeal.sickString
             //  Probably shoudl set state here with the new sickString
           })
         })
@@ -95,11 +99,14 @@ class Meals extends React.Component {
             'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json',
             "Authorization": token
-          }}).then(json => {
+          }}).then(response => response.json()).
+          then(json => {
+            console.log(json)
               this.setState(state => {
                   const userMeals = state.userMeals.filter(meal => meal.id !== deletedMeal.id)
                   return {
-                    userMeals
+                    userMeals,
+                    sickArray: json.sickString
                   }
               })
           }).catch(error => {console.log(error)})
@@ -130,6 +137,7 @@ class Meals extends React.Component {
            copyMeals[findIndex] = updatedMeal.meal
            this.setState({
              userMeals: copyMeals,
+             sickArray: updatedMeal.sickString
             // foodArr: copyMeals.food_name.split(' ')
           })
          })
@@ -184,7 +192,10 @@ class Meals extends React.Component {
           const copyMeals = [...this.state.userMeals]
           const findIndex = this.state.userMeals.findIndex(meal => meal.id === formInputs.mealId)
           copyMeals[findIndex] = updatedMeal
-          this.setState({userMeals: copyMeals})
+          this.setState({
+            userMeals: copyMeals,
+            sickArray: updatedMeal.sickString
+          })
         })
          .catch(error => console.log(error))
         }
@@ -192,12 +203,25 @@ class Meals extends React.Component {
 
 
     render() {
+      // let key = ''
         return(
             <UserContext.Consumer>
               {user => (
                 <>
                 {/* <h1>{user.currentUserId}</h1>
                 <h1>{this.props.currentId}</h1> */}
+                <ul>
+                  {this.state.sickArray.map(sickItem => {
+                    for(let i = 0; i < this.state.sickArray.length; i++) {
+                      // if(this.state.sickArray[i][0] === sickItem[0]) {
+                      //   key = i
+                      // }
+                    }
+                    return(
+                      <li>{sickItem[0]}: {sickItem[1]} </li>
+                    )
+                  })}
+                </ul>
             <Form handleSubmit = {this.handleAdd} user_id = {this.props.currentId}/>
             {this.state.userMeals.map(meal => {
                 const date = new Date(meal.created_at)
@@ -211,7 +235,8 @@ class Meals extends React.Component {
                 return (
                       <Meal fullDate = {fullDate} meal = {meal} key={meal + meal.id} handleDelete = {this.handleDelete} user_id = {this.props.user_id}
                       // foodArr = {foodArr}
-                      handleEdit = {this.handleUpdate} toggleSick = {this.toggleSick} allMeals = {this.state.userMeals}/>
+                      handleEdit = {this.handleUpdate} toggleSick = {this.toggleSick} allMeals = {this.state.userMeals}
+                      sickArray = {this.state.sickArray}/>
                 
                 )
               })}

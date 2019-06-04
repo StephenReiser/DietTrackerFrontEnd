@@ -56,7 +56,13 @@ class Meal extends React.Component {
                     {/* to be smarter - should do something like remove , before splitting and 'and' */}
                     {/* ADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTION */}
                     {this.props.meal.food_name.split(' ').map(food => {
-                      return (<li key={food}>{food}</li>)
+                      let key = 0
+                      for (let i = 0; i < this.props.sickArray.length; i++) {
+                        if (this.props.sickArray[i][0] === food.toLowerCase()) {
+                          key = this.props.sickArray[i][1]
+                        }
+                      }
+                      return (<li key={food}>{food.toLowerCase()} count: {key}</li>)
                     })}
                     
                   </ul>
