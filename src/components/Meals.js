@@ -2,7 +2,8 @@ import React from 'react'
 import Meal from './Meal'
 import Form from './Form'
 import UserContext from './UserContext'
-
+// import Chart from './Chart'
+var Chart = require("chart.js");
 let baseURL = ''
 
 if (process.env.NODE_ENV === 'development') {
@@ -26,14 +27,43 @@ class Meals extends React.Component {
         this.handleDelete = this.handleDelete.bind(this)
         this.handleUpdate = this.handleUpdate.bind(this)
         this.toggleSick = this.toggleSick.bind(this)
+        this.makeChart = this.makeChart.bind(this)
     }
     componentWillMount() {
       
         this.getMeals()
+        // this.makeChart()
       }
 
 
       // For some reason currentId isn't getting passed down
+
+      makeChart(sickStringArray) {
+        const node = this.node;
+        let labelSet = []
+        let dataSet = []
+        for (let i = 0; i < sickStringArray.length; i ++) {
+            labelSet.push(sickStringArray[i][0])
+            dataSet.push(sickStringArray[i][1])
+        }
+        var myChart = new Chart(node, {
+          type: "bar",
+          data: {
+            labels: labelSet,
+            datasets: [
+              {
+                label: "Top Foods that make you Sick!",
+                data: dataSet,
+                // backgroundColor: [
+                //   "rgba(255, 99, 132, 0.2)",
+                //   "rgba(54, 162, 235, 0.2)",
+                //   "rgba(255, 206, 86, 0.2)"
+                // ]
+              }
+            ]
+          }
+        });
+      }
     getMeals (){
         console.log(baseURL + `/users/${this.props.currentId}/meals`)
         console.log(this.props)
@@ -51,6 +81,7 @@ class Meals extends React.Component {
          
         {
           console.log(json)
+          this.makeChart(json.stringResult)
             return this.setState({
             userMeals:json.meals,
             sickArray: json.stringResult
@@ -81,6 +112,7 @@ class Meals extends React.Component {
         })
         .then (jsonMeal => {
           // console.log(jsonMeal.sickString)
+          this.makeChart(jsonMeal.sickString)
           return this.setState({
             userMeals: [jsonMeal.meal, ...this.state.userMeals],
             sickArray: jsonMeal.sickString
@@ -102,6 +134,7 @@ class Meals extends React.Component {
           }}).then(response => response.json()).
           then(json => {
             console.log(json)
+            this.makeChart(json.sickString)
               this.setState(state => {
                   const userMeals = state.userMeals.filter(meal => meal.id !== deletedMeal.id)
                   return {
@@ -132,6 +165,7 @@ class Meals extends React.Component {
           // const editHouses = houses.filter()
           //  this.getMeals()
           console.log(updatedMeal)
+          this.makeChart(updatedMeal.sickString)
            const copyMeals = [...this.state.userMeals]
            const findIndex = this.state.userMeals.findIndex(meal => meal.id === formInputs.mealId)
            copyMeals[findIndex] = updatedMeal.meal
@@ -186,6 +220,7 @@ class Meals extends React.Component {
         }).then(response => response.json())
         .then(updatedMeal => {
           console.log(updatedMeal)
+          this.makeChart(updatedMeal.sickString)
          //  this is making the whole thing rerender - need to splice it
          // const editHouses = houses.filter()
          //  this.getMeals()
@@ -204,13 +239,25 @@ class Meals extends React.Component {
 
     render() {
       // let key = ''
+      // let labelSet = []
+      // let dataSet = []
+      // for (let i = 0; i < this.state.sickArray.length; i ++) {
+      //     labelSet.push(this.state.sickArray[i][0])
+      //     dataSet.push(this.state.sickArray[i][1])
+      // }
         return(
             <UserContext.Consumer>
               {user => (
                 <>
+                {/* {this.state.sickArray.length > 1 ? <Chart sickArray = {this.state.sickArray} /> : null} */}
+                <canvas
+          style={{ width: 800, height: 300 }}
+          ref={node => (this.node = node)}
+        />
+                
                 {/* <h1>{user.currentUserId}</h1>
                 <h1>{this.props.currentId}</h1> */}
-                <ul>
+                {/* <ul>
                   {this.state.sickArray.map(sickItem => {
                     for(let i = 0; i < this.state.sickArray.length; i++) {
                       // if(this.state.sickArray[i][0] === sickItem[0]) {
@@ -221,8 +268,9 @@ class Meals extends React.Component {
                       <li>{sickItem[0]}: {sickItem[1]} </li>
                     )
                   })}
-                </ul>
+                </ul> */}
             <Form handleSubmit = {this.handleAdd} user_id = {this.props.currentId}/>
+            <div className = 'row cardContainer'>
             {this.state.userMeals.map(meal => {
                 const date = new Date(meal.created_at)
                 const year = date.getUTCFullYear()
@@ -240,6 +288,7 @@ class Meals extends React.Component {
                 
                 )
               })}
+              </div>
               </>
               )}
               </UserContext.Consumer>

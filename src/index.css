@@ -11,3 +11,36 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.mealSick {
+  background-color: rgba(255, 35, 35, 0.1);
+  /* min-height: 300px;
+  max-height: 300px; */
+  /* position: relative */
+  /* min-width: 45%;
+  margin: 1% */
+}
+
+.mealHealthy {
+  background-color: rgba(146, 191, 141, 0.098);
+  /* min-width: 45%;
+  margin: 1% */
+  /* min-height: 300px;
+  max-height: 300px; */
+  /* position: relative */
+}
+
+.cardContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap
+}
+.bottomAbs {
+  /* position: absolute;
+  bottom: 0px; */
+}
+
+/* .listUL {
+  height: 50% !important;
+  overflow: hidden;
+} */

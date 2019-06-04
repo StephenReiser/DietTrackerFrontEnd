@@ -45,38 +45,51 @@ class Meal extends React.Component {
         return(
           <UserContext.Consumer>
               {user => (
-                <div key={this.props.meal.id}>
-                  <h4>{this.props.fullDate}  {this.props.meal.title}</h4>
+                <div className="col s12 m6">
+                <div key={this.props.meal.id} className = {this.props.meal.sick ? 'mealSick card' : 'mealHealthy card' }>
+                  <h4 className = 'card-title'>{this.props.fullDate}  {this.props.meal.title}</h4>
                   <p>{this.props.meal.sick ? `This made your ${this.props.meal.sick_type} sick` : 'Not Sick'}</p>
                   {/* <h5>{this.props.meal.food_name}</h5> */}
                   {/* <ul>
                     {this.props.foodArr.map(item => <li key = {item + this.props.meal.id}>{item}</li>)}
                   </ul> */}
-                  <ul>
-                    {/* to be smarter - should do something like remove , before splitting and 'and' */}
-                    {/* ADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTIONADDING SPACE TO DRAW ATTENTION */}
-                    {/* used reg expression with replace to replace all commas and then all double spaces */}
+                  <div className = 'listDiv'>
+                  <ul className = 'listUL'>
+                    
                     {this.props.meal.food_name.replace(/,/g, ' ').replace(/  /g, ' ').split(' ').map(food => {
-                      let key = 0
-                      for (let i = 0; i < this.props.sickArray.length; i++) {
-                        if (this.props.sickArray[i][0] === food.toLowerCase()) {
-                          key = this.props.sickArray[i][1]
+                      let key = ''
+                      // for (let i = 0; i < this.props.sickArray.length; i++) {
+                      //   if (this.props.sickArray[i][0] === food.toLowerCase()) {
+                      //     key = this.props.sickArray[i][1]
+                      //   }
+                      // }
+                      for (let i = this.props.sickArray.length -1 ; i > 0; i--) {
+                        if (this.props.sickArray[i][0] === food.toLowerCase() && i > this.props.sickArray.length - 6) {
+                          key = 'red'
+                        } else if (this.props.sickArray[i][0] === food.toLowerCase() && i > this.props.sickArray.length - 11 && i <= this.props.sickArray.length - 6) {
+                          key = 'yellow'
+                        } else if(this.props.sickArray[i][0] === food.toLowerCase() && i <= this.props.sickArray.length - 11) {
+                          
                         }
                       }
-                      return (<li key={food}>{food.toLowerCase()} count: {key}</li>)
+                      return (<li key={food} className = {key}>{food.toLowerCase()} count: {key}</li>)
                     })}
                     {/* maybe add colors based on number of times sick */}
                   </ul>
+                  </div>
                   <p>Your Comments: {this.props.meal.comments}
                   User: ID: {this.props.meal.user_id}</p>
+                  <div className="card-action bottomAbs">
                   <button onClick = {() => this.props.toggleSick(this.props.meal, user.currentUserId)}>Toggle Sick</button>
                   <button onClick = {this.showEdit}>Edit Button</button>
                   <button onClick={() => this.props.handleDelete(this.props.meal)}>Delete</button>
+                  </div>
 
                   {this.state.editAvailable ? <Form meal = {this.props.meal} handleSubmit = {this.props.handleEdit} comments = {this.props.meal.comments} food_name={this.props.meal.food_name} sick = {this.props.meal.sick} sick_type = {this.props.meal.sick_type} title = {this.props.meal.title} user_id = {user.currentUserId} editAvailable = {this.state.editAvailable} showEdit = {this.showEdit}/> : null }
                   
                 </div>
 
+              </div>
               )}
               </UserContext.Consumer>
         )
