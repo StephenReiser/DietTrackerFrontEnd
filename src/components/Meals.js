@@ -1,4 +1,5 @@
 import React from 'react'
+import InfiniteScroll from 'react-infinite-scroller';
 import Meal from './Meal'
 import Form from './Form'
 import UserContext from './UserContext'
@@ -19,7 +20,8 @@ class Meals extends React.Component {
         this.state = {
             userMeals: [],
             test: 0,
-            sickArray: []
+            sickArray: [],
+            displayAddForm: false
 
         }
         this.handleAdd = this.handleAdd.bind(this)
@@ -28,6 +30,7 @@ class Meals extends React.Component {
         this.handleUpdate = this.handleUpdate.bind(this)
         this.toggleSick = this.toggleSick.bind(this)
         this.makeChart = this.makeChart.bind(this)
+        this.toggleAdd = this.toggleAdd.bind(this)
     }
     componentWillMount() {
       
@@ -61,11 +64,11 @@ class Meals extends React.Component {
               {
                 label: "Top Foods that make you Sick!",
                 data: dataSet,
-                // backgroundColor: [
-                //   "rgba(255, 99, 132, 0.2)",
+                backgroundColor: 
+                  "rgba(255, 99, 132, 0.2)"
                 //   "rgba(54, 162, 235, 0.2)",
                 //   "rgba(255, 206, 86, 0.2)"
-                // ]
+                
               }
             ]
           },
@@ -127,7 +130,8 @@ class Meals extends React.Component {
           this.makeChart(jsonMeal.sickString)
           return this.setState({
             userMeals: [jsonMeal.meal, ...this.state.userMeals],
-            sickArray: jsonMeal.sickString
+            sickArray: jsonMeal.sickString,
+            displayAddForm: false
             //  Probably shoudl set state here with the new sickString
           })
         })
@@ -247,6 +251,12 @@ class Meals extends React.Component {
          .catch(error => console.log(error))
         }
 
+        toggleAdd (event) {
+          event.preventDefault()
+          this.setState({
+            displayAddForm: !this.state.displayAddForm
+          })
+        }
 
 
     render() {
@@ -262,9 +272,13 @@ class Meals extends React.Component {
               {user => (
                 <>
                 {/* {this.state.sickArray.length > 1 ? <Chart sickArray = {this.state.sickArray} /> : null} */}
+                <div className='center-align logoutButtonDiv'>
+                <button className = 'btn' onClick={this.toggleAdd}>{this.state.displayAddForm ? 'Close new meal form': "Log new meal"}</button></div>
+                {this.state.displayAddForm ? <Form handleSubmit = {this.handleAdd} user_id = {this.props.currentId}/> : null}
+                
                 <canvas
-          style={{ width: 800, height: 300 }}
-          ref={node => (this.node = node)}
+                style={{ width: 800, height: 300 }}
+                ref={node => (this.node = node)}
         />
                 
                 {/* <h1>{user.currentUserId}</h1>
@@ -281,8 +295,20 @@ class Meals extends React.Component {
                     )
                   })}
                 </ul> */}
-            <Form handleSubmit = {this.handleAdd} user_id = {this.props.currentId}/>
+                
+            
             <div className = 'row cardContainer'>
+            
+            
+            
+            {/* <InfiniteScroll
+    pageStart={0}
+    loadMore={loadFunc}
+    hasMore={true || false}
+    loader={<div className="loader" key={0}>Loading ...</div>}
+>
+{
+  <> */}
             {this.state.userMeals.map(meal => {
                 const date = new Date(meal.created_at)
                 const year = date.getUTCFullYear()
@@ -300,6 +326,9 @@ class Meals extends React.Component {
                 
                 )
               })}
+                  {/* </>} 
+                  // <-- This is the content you want to load
+                  </InfiniteScroll> */}
               </div>
               </>
               )}

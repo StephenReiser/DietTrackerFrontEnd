@@ -6,11 +6,14 @@ class Navbar extends Component {
 render() {
     return (
         <nav>
-            <ul>
+            {/* <ul>
                 <li><Link to='/'>Home</Link></li>
                 <li><Link to='/signup'>Sign Up</Link></li>
                 <li><Link to='/login'>Log In</Link></li>
-            </ul>
+            </ul> */}
+            <div className = 'right-align'>
+                <button className='btn right-align' onClick = {this.props.logOut}>Log Out</button>
+                </div>
         </nav>
     )
 }

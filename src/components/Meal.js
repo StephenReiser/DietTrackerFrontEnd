@@ -49,8 +49,12 @@ class Meal extends React.Component {
 <>
                   {this.state.editAvailable ? <div className="col s12 m6"><Form meal = {this.props.meal} handleSubmit = {this.props.handleEdit} comments = {this.props.meal.comments} food_name={this.props.meal.food_name} sick = {this.props.meal.sick} sick_type = {this.props.meal.sick_type} title = {this.props.meal.title} user_id = {user.currentUserId} editAvailable = {this.state.editAvailable} showEdit = {this.showEdit}/> </div> : 
                   <div className="col s12 m6">
+                    
                   <div key={this.props.meal.id} className = {this.props.meal.sick ? 'mealSick card small' : 'mealHealthy card small' }>
+                    <div className = 'scrollDiv'>
+                  <div className='card-content'>
                     <h4 className = 'card-title'>{this.props.fullDate}  {this.props.meal.title}</h4>
+                    
                     <p>{this.props.meal.sick ? `This made you sick` : 'This did not make you sick'}</p>
                     {/* <h5>{this.props.meal.food_name}</h5> */}
                     {/* <ul>
@@ -83,6 +87,8 @@ class Meal extends React.Component {
                     </div>
                     <div className='comments'>Your Comments: {this.props.meal.comments}
                     {/* User: ID: {this.props.meal.user_id} */}
+                    </div>
+                    </div>
                     </div>
                     <div className="card-action bottomAbs">
                     <button onClick = {() => this.props.toggleSick(this.props.meal, user.currentUserId)}>Toggle Sick</button>

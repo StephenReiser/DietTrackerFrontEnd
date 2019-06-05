@@ -6,6 +6,8 @@ import Login from './components/Login'
 import NewUser from './components/NewUser'
 import Navbar from './components/Navbar'
 import UserContext from './components/UserContext'
+import CombinedLogin from './components/CombinedLoginView'
+
 
 
 let baseURL = ''
@@ -245,19 +247,38 @@ class App extends React.Component {
     return(
       <UserContext.Provider value={user}>
       <Router>
-        <Navbar />
+        <Navbar logOut = {this.logOut}/>
+        
       
         <div className = 'container'>
-          <Route path = '/login' render = {() => <Login login = {this.login} handleChange = {this.handleChange} loginEmail = {this.state.loginEmail} loginPassword = {this.state.loginPassword} 
+        {this.state.currentUser ? null : <CombinedLogin login = {this.login}
+        handleChange = {this.handleChange}
+        loginEmail = {this.state.loginEmail} loginPassword = {this.state.loginPassword} 
+        loggedIn = {this.state.loggedIn}
+        currentUser = {this.state.currentUser}
+        currentId = {this.state.currentUserId}
+        handleAdd = {this.handleAdd}
+        email = {this.state.email}
+        password = {this.state.password} password_confirmation = {this.state.password_confirmation}
+        
+        
+        
+        
+        />}
+          {/* {this.state.currentUser ? null : 
+        <NewUser handleAdd = {this.handleAdd} handleChange = {this.handleChange} email = {this.state.email} password = {this.state.password} password_confirmation = {this.state.password_confirmation} loggedIn = {this.state.loggedIn}
+          currentUser = {this.state.currentUser} currentId = {this.state.currentUserId}/> } */}
+
+          {/* <Route path = '/login' render = {() => <Login login = {this.login} handleChange = {this.handleChange} loginEmail = {this.state.loginEmail} loginPassword = {this.state.loginPassword} 
           loggedIn = {this.state.loggedIn}
           currentUser = {this.state.currentUser} currentId = {this.state.currentUserId}/>} />
 
           
 
           <Route path ='/signup' render = {() => <NewUser handleAdd = {this.handleAdd} handleChange = {this.handleChange} email = {this.state.email} password = {this.state.password} password_confirmation = {this.state.password_confirmation} loggedIn = {this.state.loggedIn}
-          currentUser = {this.state.currentUser} currentId = {this.state.currentUserId}/> } />
+          currentUser = {this.state.currentUser} currentId = {this.state.currentUserId}/> } /> */}
 
-          <button onClick = {this.logOut}>Log Out</button>
+          
 
           {/* this way - when logged in state, can render just home page or just sign up page */}
           {this.state.currentUser ? <Route path= '/' exact render = {()=> <Homepage currentUser = {this.state.currentUser} currentId = {this.state.currentUserId} props = {this.state}/>} /> : null }

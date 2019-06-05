@@ -40,9 +40,7 @@ class Homepage extends React.Component {
 
                 {/* comments = {this.state.comments} food_name={this.state.food_name} sick = {this.state.sick} sick_type = {this.state.sick_type} title = {this.state.title}  */}
                 </div>
-                <div className = 'col m9'>
-                LOTS OF STUFF GOES HERE  testing this outLOTS OF STUFF GOES HERE  testing this outLOTS OF STUFF GOES HERE  testing this outLOTS OF STUFF GOES HERE  testing this outLOTS OF STUFF GOES HERE  testing this outLOTS OF STUFF GOES HERE  testing this outLOTS OF STUFF GOES HERE  testing this outLOTS OF STUFF GOES HERE  testing this outLOTS OF STUFF GOES HERE  testing this out
-                </div>
+                
                 {/* <div className = 'row'> */}
                 <div className = 'col m12'>
                     <Meals currentUser = {this.props.currentUser} currentId = {this.props.currentId}

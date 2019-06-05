@@ -45,15 +45,25 @@ code {
   overflow: hidden;
 } */
 
-.listDiv {
+/* .listDiv {
   max-height: 40% !important;
   overflow: scroll;
   overflow-x: hidden;
-}
+} */
 
-.comments {
+/* .comments {
   max-height: 15% !important;
   overflow: hidden;
 
-  /* border: 2px solid black; */
+  border: 2px solid black;
+} */
+
+.logoutButtonDiv, .signUpButtonDiv {
+  padding: 1%;
+  margin: 1%
+}
+.scrollDiv {
+  overflow: scroll;
+  max-height: 80%;
+  overflow-x: hidden
 }

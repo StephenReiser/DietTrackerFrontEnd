@@ -37,7 +37,7 @@ class NewUser extends React.Component {
 
         <input type="submit"></input>
         
-        
+        {/* <Link to='/login'>Already Have an Account? Login Here</Link> */}
           
         </form>
         {this.props.loggedIn ? <Redirect to ='/' /> : null}
