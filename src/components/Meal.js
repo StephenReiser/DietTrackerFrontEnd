@@ -71,7 +71,14 @@ class Meal extends React.Component {
                         //     key = this.props.sickArray[i][1]
                         //   }
                         // }
-                        for (let i = this.props.sickArray.length -1 ; i > 0; i--) {
+                      //   if (this.props.sickArray.length < 5) {
+                      //     for (let i = this.props.sickArray.length -1 ; i >= 0; i--) {
+                      //       if (this.props.sickArray[i][0] === food.toLowerCase()) {
+                      //         key = 'red'
+                      //     }
+                      //   }
+                      // } else {
+                        for (let i = this.props.sickArray.length -1 ; i >= 0; i--) {
                           if (this.props.sickArray[i][0] === food.toLowerCase() && i > this.props.sickArray.length - 6) {
                             key = 'red'
                           } else if (this.props.sickArray[i][0] === food.toLowerCase() && i > this.props.sickArray.length - 11 && i <= this.props.sickArray.length - 6) {
@@ -80,6 +87,7 @@ class Meal extends React.Component {
                             
                           }
                         }
+                      // }
                         return (<li key={food} >{food.toLowerCase()} {key === 'red' ? <i class="far fa-dizzy"></i> : 
                         <>{key === 'yellow' ? <i class="far fa-frown-open"></i> : null } </>
                       }</li>)
