@@ -129,7 +129,7 @@ class Form extends React.Component {
                 {/* this below beasically is forcing user to use toggle sick button on edit but there is a check box on add new */}
                   {this.props.editAvailable ? null : <label>
                     <input type="checkbox" id = 'sick' onChange={this.handleCheck}/>
-                    <span>Did this Make you sick?</span>
+                    <span>Did this make you sick?</span>
                   </label>}
 
                  {/* <label>
