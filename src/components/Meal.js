@@ -91,9 +91,9 @@ class Meal extends React.Component {
                     </div>
                     </div>
                     <div className="card-action bottomAbs">
-                    <button onClick = {() => this.props.toggleSick(this.props.meal, user.currentUserId)}>Toggle Sick</button>
-                    <button onClick = {this.showEdit}>Edit Button</button>
-                    <button onClick={() => this.props.handleDelete(this.props.meal)}>Delete</button>
+                    <button className = 'btn' onClick = {() => this.props.toggleSick(this.props.meal, user.currentUserId)}>Toggle Sick</button>
+                    <button className = 'btn' onClick = {this.showEdit}>Edit Button</button>
+                    <button className = 'btn' onClick={() => this.props.handleDelete(this.props.meal)}>Delete</button>
                     </div></div></div> }
                   </>
                

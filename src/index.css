@@ -67,3 +67,7 @@ code {
   max-height: 80%;
   overflow-x: hidden
 }
+
+.clearLink {
+  color: white;
+}

@@ -7,6 +7,8 @@ import NewUser from './components/NewUser'
 import Navbar from './components/Navbar'
 import UserContext from './components/UserContext'
 import CombinedLogin from './components/CombinedLoginView'
+import updatePW from './components/UpdatePW'
+import UpdatePW from './components/UpdatePW';
 
 
 
@@ -33,7 +35,10 @@ class App extends React.Component {
       currentUser: '',
       currentUserId: '',
       loggedIn: false,
-      tempID: ''
+      tempID: '',
+      editPassword: '',
+      editPassword_confirmation: '',
+      updatedPassword: false
     }
     this.login = this.login.bind(this)
     this.logOut = this.logOut.bind(this)
@@ -41,6 +46,8 @@ class App extends React.Component {
     this.handleAdd = this.handleAdd.bind(this)
     this.getUser = this.getUser.bind(this)
     this.getNewUser = this.getNewUser.bind(this)
+    this.updateUser = this.updateUser.bind(this)
+    this.resetUpdatePasswordState = this.resetUpdatePasswordState.bind(this)
     
   }
   handleChange (event) {
@@ -234,10 +241,47 @@ class App extends React.Component {
       password_confirmation: '',
       loginEmail: '',
       loginPassword: '',
+      updatedPassword: false
     })
-    // I think it makes sense to alter state when logged in and logged out
+    
   }
   
+updateUser(event) {
+  event.preventDefault()
+  let token = "Bearer " + localStorage.getItem("jwt")
+  const user = {
+    "user": {
+      email: this.state.currentUser,
+      password: this.state.editPassword,
+      password_confirmation: this.state.editPassword_confirmation,
+      
+  }}
+console.log(user)
+  fetch(baseURL + `/users/${this.state.currentUserId}`, {
+    body: JSON.stringify(user),
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
+      "Authorization": token
+    }
+  }).then(response => response.json()).then(json => console.log(json)).then(json => {
+    return this.setState({
+      updatedPassword: true,
+      editPassword: '',
+      editPassword_confirmation: ''})
+  }).catch(error => console.log(error))
+
+}
+
+resetUpdatePasswordState (event) {
+  event.preventDefault()
+  this.setState({
+    updatedPassword: false
+  })
+}
+
+
 
   render () {
     const { user } = {
@@ -247,7 +291,7 @@ class App extends React.Component {
     return(
       <UserContext.Provider value={user}>
       <Router>
-        <Navbar logOut = {this.logOut}/>
+        <Navbar logOut = {this.logOut} resetUpdatePasswordState = {this.resetUpdatePasswordState}/>
         
       
         <div className = 'container'>
@@ -281,7 +325,16 @@ class App extends React.Component {
           
 
           {/* this way - when logged in state, can render just home page or just sign up page */}
-          {this.state.currentUser ? <Route path= '/' exact render = {()=> <Homepage currentUser = {this.state.currentUser} currentId = {this.state.currentUserId} props = {this.state}/>} /> : null }
+          {this.state.currentUser ? 
+          <>
+          <Route path= '/' exact render = {()=> <Homepage currentUser = {this.state.currentUser} currentId = {this.state.currentUserId} props = {this.state}/>} />
+          
+          <Route path='/updatePW' render = {() => <UpdatePW handleChange = {this.handleChange} updateUser = {this.updateUser} editPassword = {this.state.editPassword} editPassword_confirmation = {this.state.editPassword_confirmation}
+          email = {this.state.currentUser} updatedPassword = {this.state.updatedPassword}/>}
+          />
+          
+          </>
+          : null }
           
           {/* <h1>Some User Name Food Tracker</h1> */}
           
