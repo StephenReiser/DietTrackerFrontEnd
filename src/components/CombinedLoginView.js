@@ -19,7 +19,8 @@ class CombinedLogin extends React.Component{
         super(props)
         this.state = {
             alreadySignUp: false,
-            forgotPassword: false
+            forgotPassword: false,
+            emailSent: false
 
         }
         this.toggleSignUp = this.toggleSignUp.bind(this)
@@ -36,7 +37,8 @@ class CombinedLogin extends React.Component{
     toggleForgotPW (event) {
         event.preventDefault()
         this.setState({
-            forgotPassword: !this.state.forgotPassword
+            forgotPassword: !this.state.forgotPassword,
+            emailSent: false
         })
     }
 
@@ -56,7 +58,9 @@ class CombinedLogin extends React.Component{
               'Content-Type': 'application/json',
               
             }
-          }).then(response => response.json()).then(json => console.log(json)).catch(error => console.log(error))
+          }).then(response => response.json()).then(json => this.setState({
+              emailSent: true
+          })).catch(error => console.log(error))
 
 
         // need a fetch request
@@ -64,19 +68,23 @@ class CombinedLogin extends React.Component{
     render() {
         return(
             <>
+            <div className='blurb'>
+                All sorts of useful things shoudl go here.  User should sign up here!
+
+            </div>
             <div className = 'signUpButtonDiv center-align'>
             <button className = 'btn large signUpButton' onClick = {this.toggleSignUp}>{this.state.alreadySignUp ? "Don't have an account? Sign up here" : 'Already have an account? Log in here'}</button>
             </div>
 
             {this.state.forgotPassword ? <Forgot 
             handleChange = {this.props.handleChange} loginEmail = {this.props.loginEmail}
-            newPassword = {this.newPassword}/> :
+            newPassword = {this.newPassword} /> :
             <>
 
             {this.state.alreadySignUp ? <Login login = {this.props.login} handleChange = {this.props.handleChange} loginEmail = {this.props.loginEmail} loginPassword = {this.props.loginPassword} 
             loggedIn = {this.props.loggedIn}
             currentUser = {this.props.currentUser} currentId = {this.props.currentUserId}
-            toggleForgotPW = {this.toggleForgotPW}/> : 
+            toggleForgotPW = {this.toggleForgotPW} emailSent = {this.state.emailSent}/> : 
             
             <NewUser 
             handleAdd = {this.props.handleAdd} handleChange = {this.props.handleChange} email = {this.props.email}

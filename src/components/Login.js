@@ -8,9 +8,11 @@ class Login extends React.Component {
         return(
             <>
             <h1>Log IN FORM = WORKS</h1>
+            {this.props.emailSent ? <h5>Password sent.  Please check your email!</h5> : 
             <div className = 'center-align'>
             <button className='btn' onClick = {this.props.toggleForgotPW}>Forgot Password</button>
             </div>
+            }
         <form>
           <label htmlFor="email">Email: </label>
           <br />

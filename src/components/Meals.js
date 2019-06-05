@@ -272,6 +272,7 @@ class Meals extends React.Component {
               {user => (
                 <>
                 {/* {this.state.sickArray.length > 1 ? <Chart sickArray = {this.state.sickArray} /> : null} */}
+                {this.state.userMeals < 1 ? <p>Welcome to Food Tracker, click on the 'Log new meal' button to input a new meal.  Be sure to include all food items you ate and if it made you sick</p> : null}
                 <div className='center-align logoutButtonDiv'>
                 <button className = 'btn' onClick={this.toggleAdd}>{this.state.displayAddForm ? 'Close new meal form': "Log new meal"}</button></div>
                 {this.state.displayAddForm ? <Form handleSubmit = {this.handleAdd} user_id = {this.props.currentId}/> : null}
@@ -280,6 +281,7 @@ class Meals extends React.Component {
                 style={{ width: 800, height: 300 }}
                 ref={node => (this.node = node)}
         />
+
                 
                 {/* <h1>{user.currentUserId}</h1>
                 <h1>{this.props.currentId}</h1> */}

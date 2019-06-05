@@ -6,6 +6,8 @@ class Forgot extends React.Component {
     render() {
         return(
             // <h5><Link to='/'></Link>email sent, return to login</h5>
+            <>
+            
             <form>
           <label htmlFor="email">Email: </label>
           <br />
@@ -22,7 +24,7 @@ class Forgot extends React.Component {
               Request New Password
           </button>
           </form>
-          
+          </>
         )
     }
 }
