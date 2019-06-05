@@ -80,7 +80,9 @@ class Meal extends React.Component {
                             
                           }
                         }
-                        return (<li key={food} className = {key}>{food.toLowerCase()}</li>)
+                        return (<li key={food} >{food.toLowerCase()} {key === 'red' ? <i class="far fa-dizzy"></i> : 
+                        <>{key === 'yellow' ? <i class="far fa-frown-open"></i> : null } </>
+                      }</li>)
                       })}
                       {/* maybe add colors based on number of times sick */}
                     </ul>
