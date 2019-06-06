@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom
 class NewUser extends React.Component {
     render () {
         return(
-          <div className = 'col s6 m6'>
+          <div className = 'col s4 m5 offset-s8 offset-m7'>
             <h4>Sign Up</h4>
-          <form onSubmit={this.props.handleAdd}>
+          <form onSubmit={this.props.handleAdd} className = 'formShift'>
         <label htmlFor="email">Email</label>
         <input
           id="email"
@@ -14,7 +14,7 @@ class NewUser extends React.Component {
           type="text"
           value={this.props.email}
           onChange={this.props.handleChange}
-          placeholder="New Email"
+          // placeholder="New Email"
         />
          <label htmlFor="password">Password</label>
         <input
@@ -23,16 +23,16 @@ class NewUser extends React.Component {
           type="password"
           value={this.props.password}
           onChange={this.props.handleChange}
-          placeholder="New Password"
+          // placeholder="New Password"
         />
-        <label htmlFor="password_confirmation">Re Enter Password</label>
+        <label htmlFor="password_confirmation">Re-enter Password</label>
         <input
           id="password_confirmation"
           name="password_confirmation"
           type="password"
           value={this.props.password_confirmation}
           onChange={this.props.handleChange}
-          placeholder="Password Confirmation"
+          // placeholder="Password Confirmation"
         />
 
         <input className = 'btn' type="submit"></input>

@@ -14,7 +14,7 @@ render() {
           type="text"
           value={this.props.email}
           onChange={this.props.handleChange}
-          placeholder="New Email"
+          // placeholder="New Email"
           disabled
         />
          <label htmlFor="password">Password</label>
@@ -24,7 +24,7 @@ render() {
           type="text"
           value={this.props.editPassword}
           onChange={this.props.handleChange}
-          placeholder="New Password"
+          // placeholder="New Password"
         />
         <label htmlFor="password_confirmation">Re Enter Password</label>
         <input
@@ -33,7 +33,7 @@ render() {
           type="text"
           value={this.props.editPassword_confirmation}
           onChange={this.props.handleChange}
-          placeholder="Password Confirmation"
+          // placeholder="Password Confirmation"
         />
 
         <input className = 'btn-small' type="submit"></input>

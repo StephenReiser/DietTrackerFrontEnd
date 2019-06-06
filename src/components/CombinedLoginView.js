@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom
 import Login from './Login'
 import NewUser from './NewUser'
 import Forgot from './ForgotPW'
+import Background from '../images/background.jpg'
 
 
 let baseURL = ''
@@ -77,7 +78,8 @@ class CombinedLogin extends React.Component{
             <div className = 'signUpButtonDiv center-align'>
             <button className = 'btn large signUpButton' onClick = {this.toggleSignUp}>{this.state.alreadySignUp ? "Don't have an account? Sign up here" : 'Already have an account? Log in here'}</button>
             </div>
-<div className = 'row'>
+<div className = 'row logInScreen'>
+    {/* <img src={Background} alt='background' /> */}
             {this.state.forgotPassword ? <Forgot 
             handleChange = {this.props.handleChange} loginEmail = {this.props.loginEmail}
             newPassword = {this.newPassword} /> :

@@ -6,9 +6,9 @@ class Forgot extends React.Component {
     render() {
         return(
             // <h5><Link to='/'></Link>email sent, return to login</h5>
-            <div className = 'col s6 m6'>
+            <div className = 'col s4 m5 offset-s8 offset-m7'>
             
-            <form>
+            <form className = 'formShift'>
           <label htmlFor="email">Email: </label>
           <br />
           <input

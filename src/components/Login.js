@@ -6,10 +6,10 @@ class Login extends React.Component {
 
     render() {
         return(
-          <div className = 'col s6 m6'>
+          <div className = 'col s4 m5 offset-s8 offset-m7'>
             <h4>Log In</h4>
             
-        <form>
+        <form className = 'formShift'>
           <label htmlFor="email">Email: </label>
           <br />
           <input

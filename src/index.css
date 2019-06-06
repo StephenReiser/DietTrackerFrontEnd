@@ -129,3 +129,18 @@ nav {
   background-color: #009BA5CC;
   
 }
+
+.logInScreen {
+  background-image: url(./images/background.jpg);
+  background-size: cover;
+  height: 400px;
+}
+
+.formShift {
+  margin-right: 4%;
+}
+
+.formShift > input::placeholder {
+  /* opacity: 1; */
+  color: #303030B3
+}
