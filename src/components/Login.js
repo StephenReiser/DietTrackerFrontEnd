@@ -6,13 +6,9 @@ class Login extends React.Component {
 
     render() {
         return(
-            <>
-            <h1>Log IN FORM = WORKS</h1>
-            {this.props.emailSent ? <h5>Password sent.  Please check your email!</h5> : 
-            <div className = 'center-align'>
-            <button className='btn' onClick = {this.props.toggleForgotPW}>Forgot Password</button>
-            </div>
-            }
+          <div className = 'col s6 m6'>
+            <h4>Log In</h4>
+            
         <form>
           <label htmlFor="email">Email: </label>
           <br />
@@ -35,13 +31,20 @@ class Login extends React.Component {
           />
           </form>
           <br />
-          <button
+          <button className = 'btn'
             onClick={this.props.login}
           >
               Login
           </button>
+          
+          {this.props.emailSent ? <h5>Password sent.  Please check your email!</h5> : 
+            
+            <button className='btn' onClick = {this.props.toggleForgotPW}>Forgot Password</button>
+            
+            }
+
           {this.props.loggedIn ? <Redirect to ='/' /> : null}
-          </>
+          </div>
         )
     }
 

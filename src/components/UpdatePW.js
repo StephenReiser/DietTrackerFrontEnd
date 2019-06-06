@@ -5,7 +5,7 @@ class UpdatePW extends React.Component {
 render() {
     return(
        <>
-       <h1>Create New User Form</h1>
+       <h4>Update Password</h4>
           <form onSubmit={this.props.updateUser}>
         <label htmlFor="email">Email</label>
         <input
@@ -36,7 +36,7 @@ render() {
           placeholder="Password Confirmation"
         />
 
-        <input type="submit"></input>
+        <input className = 'btn-small' type="submit"></input>
         
         {/* <Link to='/login'>Already Have an Account? Login Here</Link> */}
           

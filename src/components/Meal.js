@@ -88,8 +88,8 @@ class Meal extends React.Component {
                           }
                         }
                       // }
-                        return (<li key={food} >{food.toLowerCase()} {key === 'red' ? <i class="far fa-dizzy"></i> : 
-                        <>{key === 'yellow' ? <i class="far fa-frown-open"></i> : null } </>
+                        return (<li key={food} >{food.toLowerCase()} {key === 'red' ? <i className="far fa-dizzy"></i> : 
+                        <>{key === 'yellow' ? <i className="far fa-frown-open"></i> : null } </>
                       }</li>)
                       })}
                       {/* maybe add colors based on number of times sick */}
@@ -101,9 +101,9 @@ class Meal extends React.Component {
                     </div>
                     </div>
                     <div className="card-action bottomAbs">
-                    <button className = 'btn' onClick = {() => this.props.toggleSick(this.props.meal, user.currentUserId)}>Toggle Sick</button>
-                    <button className = 'btn' onClick = {this.showEdit}>Edit Button</button>
-                    <button className = 'btn' onClick={() => this.props.handleDelete(this.props.meal)}>Delete</button>
+                    <button className = 'btn-small' onClick = {() => this.props.toggleSick(this.props.meal, user.currentUserId)}>Toggle Sick</button>
+                    <button className = 'btn-small' onClick = {this.showEdit}>Edit Button</button>
+                    <button className = 'btn-small' onClick={() => this.props.handleDelete(this.props.meal)}>Delete</button>
                     </div></div></div> }
                   </>
                

@@ -58,9 +58,11 @@ class CombinedLogin extends React.Component{
               'Content-Type': 'application/json',
               
             }
-          }).then(response => response.json()).then(json => this.setState({
+          }).then(response => response.json()).then(json => {
+              console.log(json)
+              return this.setState({
               emailSent: true
-          })).catch(error => console.log(error))
+          })}).catch(error => console.log(error))
 
 
         // need a fetch request
@@ -75,7 +77,7 @@ class CombinedLogin extends React.Component{
             <div className = 'signUpButtonDiv center-align'>
             <button className = 'btn large signUpButton' onClick = {this.toggleSignUp}>{this.state.alreadySignUp ? "Don't have an account? Sign up here" : 'Already have an account? Log in here'}</button>
             </div>
-
+<div className = 'row'>
             {this.state.forgotPassword ? <Forgot 
             handleChange = {this.props.handleChange} loginEmail = {this.props.loginEmail}
             newPassword = {this.newPassword} /> :
@@ -92,6 +94,7 @@ class CombinedLogin extends React.Component{
             loggedIn = {this.props.loggedIn}
             currentUser = {this.props.currentUser} currentId = {this.props.currentUserId}/>}
             </>}
+            </div>
             </>
         )
     }

@@ -154,7 +154,7 @@ class Form extends React.Component {
                     id={'food_name'}
                 /> 
 
-            <input type='submit' value={this.props.editAvailable ? "update this meal" : "Add a Meal"}/>
+            <input className = 'btn-small' type='submit' value={this.props.editAvailable ? "update this meal" : "Add a Meal"}/>
         </form>
         )
     }

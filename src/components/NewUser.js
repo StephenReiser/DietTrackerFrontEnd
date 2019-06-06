@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom
 class NewUser extends React.Component {
     render () {
         return(
-            <>
-            <h1>Create New User Form</h1>
+          <div className = 'col s6 m6'>
+            <h4>Sign Up</h4>
           <form onSubmit={this.props.handleAdd}>
         <label htmlFor="email">Email</label>
         <input
@@ -20,7 +20,7 @@ class NewUser extends React.Component {
         <input
           id="password"
           name="password"
-          type="text"
+          type="password"
           value={this.props.password}
           onChange={this.props.handleChange}
           placeholder="New Password"
@@ -29,19 +29,19 @@ class NewUser extends React.Component {
         <input
           id="password_confirmation"
           name="password_confirmation"
-          type="text"
+          type="password"
           value={this.props.password_confirmation}
           onChange={this.props.handleChange}
           placeholder="Password Confirmation"
         />
 
-        <input type="submit"></input>
+        <input className = 'btn' type="submit"></input>
         
         {/* <Link to='/login'>Already Have an Account? Login Here</Link> */}
           
         </form>
         {this.props.loggedIn ? <Redirect to ='/' /> : null}
-            </>
+            </div>
         )
     }
 }
