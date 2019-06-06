@@ -102,16 +102,16 @@ class Form extends React.Component {
             <form onSubmit={this.handleSubmit}>
                 <Input
                     handleChange={this.handleChange}
-                    name={'title'}
-                    placeholder={'title'}
+                    name={'Meal Name'}
+                    placeholder={'Meal Name'}
                     type={'text'}
                     value={this.state.title}
                     id={'title'}
                 />  
                 <Input
                     handleChange={this.handleChange}
-                    name={'comments'}
-                    placeholder={'comments'}
+                    name={'Comments'}
+                    placeholder={'Comments'}
                     type={'textarea'}
                     value={this.state.comments}
                     id={'comments'}
@@ -139,16 +139,16 @@ class Form extends React.Component {
                
                 <Input
                     handleChange={this.handleChange}
-                    name={'sick_type'}
-                    placeholder={'sick_type'}
+                    name={`What part of you is sick`}
+                    placeholder={'What part of you is sick'}
                     type={'text'}
                     value={this.state.sick_type}
                     id={'sick_type'}
                 />  
                  <Input
                     handleChange={this.handleChange}
-                    name={'food_name'}
-                    placeholder={'food_name'}
+                    name={'Food Items'}
+                    placeholder={'Food Items'}
                     type={'text'}
                     value={this.state.food_name}
                     id={'food_name'}

@@ -101,7 +101,7 @@ class Meal extends React.Component {
                     </div>
                     </div>
                     <div className="card-action bottomAbs">
-                    <button className = 'btn-small' onClick = {() => this.props.toggleSick(this.props.meal, user.currentUserId)}>Toggle Sick</button>
+                    <button className = 'btn-small' onClick = {() => this.props.toggleSick(this.props.meal, user.currentUserId)}>{this.props.meal.sick ? 'Oops, not sick' : "Ugh, I'm sick"}</button>
                     <button className = 'btn-small' onClick = {this.showEdit}>Edit Button</button>
                     <button className = 'btn-small' onClick={() => this.props.handleDelete(this.props.meal)}>Delete</button>
                     </div></div></div> }
