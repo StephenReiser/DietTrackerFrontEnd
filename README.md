@@ -12,4 +12,4 @@ The bulk of the front end is built with React. A other tools were used such as R
 Finish styling. Finish user experience. Finish full auth experience. Refactor :) (functionality was forced in to certain parts of the code)
 
 ### Live link:
-[Link on Heroku] (https://protected-thicket-74691.herokuapp.com/)
+(https://protected-thicket-74691.herokuapp.com/)
