@@ -272,7 +272,7 @@ class Meals extends React.Component {
               {user => (
                 <>
                 {/* {this.state.sickArray.length > 1 ? <Chart sickArray = {this.state.sickArray} /> : null} */}
-                {this.state.userMeals < 1 ? <p>Welcome to your personalized Food Tracker, click on the 'Log new meal' button to add your most recent meal or snack. Be sure to add  all food items you ate. Forgot something? You can always go back and edit your meal! Once you log a new meal or snack, the graph of your top 10 triggers will update and marked with an emoji below.</p> : null}
+                {this.state.userMeals < 1 ? <p>Welcome to your personalized Food Tracker, click on the 'Log new meal' button to add your most recent meal or snack. Be sure to add  all food items you ate. Forgot something? You can always go back and edit your meal! Once you log a new meal or snack, the graph of your top triggers will update and trigger foods will be marked with an emoji below.</p> : null}
                 <div className='center-align logoutButtonDiv'>
                 <button className = 'btn' onClick={this.toggleAdd}>{this.state.displayAddForm ? 'Close new meal form': "Log new meal"}</button></div>
                 {this.state.displayAddForm ? <Form handleSubmit = {this.handleAdd} user_id = {this.props.currentId}/> : null}

@@ -72,7 +72,7 @@ class CombinedLogin extends React.Component{
         return(
             <>
             <div className='blurb'>
-            Welcome to [TK site name]! Here, you can log your meals and snacks, and keep track of what makes you feel not your best. We keep things simple—no measurements or macros—and focus just on the ingredients themselves. Each time you log a new meal, you can indicate whether or not it made you feel sick. Over time, [TK site name] will keep track of your top 10 food triggers so you can notice any patterns and make informed decisions about your health. 
+            Welcome to Tabs on Food! Here, you can log your meals and snacks, and keep tabs oo what makes you feel well and not so well. We keep things simple—no measurements or macros—and focus just on the ingredients themselves. Each time you log a new meal, you can indicate whether or not it made you feel sick. Over time, Tabs on Food will keep track of your top food triggers so you can notice any patterns and make informed decisions about your health. 
 
             </div>
             <div className = 'signUpButtonDiv center-align'>
