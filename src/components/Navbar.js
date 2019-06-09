@@ -8,7 +8,7 @@ render() {
         <>
 <nav>
     <div className="nav-wrapper">
-      <a href="#!" className="brand-logo">Tabs on Food</a>
+      <a href="/" className="brand-logo">Tabs on Food</a>
       <a href="#" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
         
